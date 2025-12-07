@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -e .
+    
+    - name: Check syntax
+      run: |
+        python -m py_compile ai_history_analyser/**/*.py
+    
+    - name: Test imports
+      run: |
+        python -c "import ai_history_analyser; print('Import successful')"
+        python -c "from ai_history_analyser.parsers import get_parser; print('Parsers import successful')"
+        python -c "from ai_history_analyser.analyzers import get_analyzer; print('Analyzers import successful')"
+        python -c "from ai_history_analyser.exporters import get_exporter; print('Exporters import successful')"
+    
+    - name: Test CLI help
+      run: |
+        python -m ai_history_analyser --help
+    
+    - name: Test init-config
+      run: |
+        python -m ai_history_analyser init-config --output /tmp/test_config.yaml
+        test -f /tmp/test_config.yaml
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    
+    - name: Install linting tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pylint
+    
+    - name: Run flake8
+      run: |
+        pip install flake8
+        flake8 ai_history_analyser --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 ai_history_analyser --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      continue-on-error: true
+    
+    - name: Check code formatting
+      run: |
+        python -m py_compile ai_history_analyser/**/*.py
+

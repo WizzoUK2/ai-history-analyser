@@ -1,5 +1,7 @@
 # AI History Analyser
 
+[![CI](https://github.com/WizzoUK2/ai-history-analyser/actions/workflows/ci.yml/badge.svg)](https://github.com/WizzoUK2/ai-history-analyser/actions/workflows/ci.yml)
+
 A tool to analyze chat histories from ChatGPT, Claude, Gemini, and other AI assistants to identify unfinished projects, prioritize them, and optionally export to Obsidian.
 
 ## Features
