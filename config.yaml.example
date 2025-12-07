@@ -1,0 +1,33 @@
+# Example configuration file for AI History Analyser
+# Copy this to config.yaml and customize as needed
+
+analysis:
+  unfinished_projects:
+    # Keywords to search for (regex patterns)
+    keywords:
+      - "\\bTODO\\b"
+      - "\\bFIXME\\b"
+      - "\\bneed to\\b"
+      - "\\bshould implement\\b"
+      - "\\bnext steps\\b"
+      - "\\bnot done\\b"
+      - "\\bunfinished\\b"
+      - "\\bincomplete\\b"
+    
+    # Minimum confidence threshold (0.0 to 1.0)
+    min_confidence: 0.5
+
+obsidian:
+  # Path to your Obsidian vault
+  vault_path: ~/Documents/ObsidianVault
+  
+  # Folder within vault to store results
+  folder: "AI Projects"
+
+exporters:
+  obsidian:
+    folder: "AI Projects"
+  
+  json:
+    pretty: true
+
