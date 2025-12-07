@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/WizzoUK2/ai-history-analyser/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Documentation
+    url: https://github.com/WizzoUK2/ai-history-analyser#readme
+    about: Check the README and usage guide
+

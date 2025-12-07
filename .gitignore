@@ -35,4 +35,5 @@ dmypy.json
 config.yaml
 *.json
 !example_*.json
+test_*.json
 
