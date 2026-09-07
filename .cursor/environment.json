@@ -1,0 +1,4 @@
+{
+  "name": "AI History Analyser",
+  "install": "sudo pip install --break-system-packages -r requirements.txt && sudo pip install --break-system-packages -e .[dev]"
+}
