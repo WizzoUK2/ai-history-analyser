@@ -37,3 +37,6 @@ config.yaml
 !example_*.json
 test_*.json
 
+# Cloud Agent environment config (tracked despite the *.json rule above)
+!.cursor/environment.json
+
